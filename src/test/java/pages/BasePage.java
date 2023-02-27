@@ -20,7 +20,8 @@ public class BasePage {
     private static Action action;
 
     static {
-        WebDriverManager.chromedriver().setup();
+        // WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", "C:/Program Files/ChromeDriver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -41,9 +41,15 @@ dependencies {
 //     systemProperty "cucumber.options", System.getProperty("cucumber.options")
 // }
 
+// test {
+//     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+//     testLogging {
+//         showStandardStreams = true
+//     }
+// }
+
 test {
-    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
-    testLogging {
-        showStandardStreams = true
-    }
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }

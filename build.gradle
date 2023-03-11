@@ -48,8 +48,12 @@ dependencies {
 //     }
 // }
 
-test {
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
+// test {
+//     testLogging.showStandardStreams = true
+//     systemProperties System.getProperties()
+//     systemProperty "cucumber.options", System.getProperty("cucumber.options")
+// }
+
+test{
     systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }

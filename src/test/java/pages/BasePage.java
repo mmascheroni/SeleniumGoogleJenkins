@@ -16,15 +16,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class BasePage {
 
     protected static WebDriver driver;
-    protected static WebDriverWait wait;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     private static Action action;
 
     static {
-        // WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.chrome.driver", "C:/Program Files/ChromeDriver/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
+        // System.setProperty("webdriver.chrome.driver", "C:/Program
+        // Files/ChromeDriver/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         driver = new ChromeDriver(chromeOptions);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public BasePage(WebDriver driver) {

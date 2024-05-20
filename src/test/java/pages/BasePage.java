@@ -15,21 +15,19 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BasePage {
 
-    protected static WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    private static Action action;
+    public WebDriver driver;
 
-    static {
-        WebDriverManager.chromedriver().setup();
-        // System.setProperty("webdriver.chrome.driver", "C:/Program
-        // Files/ChromeDriver/chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        driver = new ChromeDriver(chromeOptions);
+    public WebDriverWait wait;
+
+    protected BasePage(WebDriver driver, WebDriverWait wait) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofMillis(5000));
     }
 
-    public BasePage(WebDriver driver) {
-        BasePage.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    public void setup() {
+        WebDriverManager.chromedriver().setup();
+
+        driver.manage().window().maximize();
     }
 
     public void navigateTo(String url) {
@@ -47,5 +45,9 @@ public class BasePage {
 
     public void clickElement(String locator) {
         Find(locator).click();
+    }
+
+    public void verifyText(String locator, String expectedText) {
+        Find(locator).getText();
     }
 }

@@ -6,7 +6,7 @@ plugins {
 group 'CursoUdemy'
 version '1.0'
 
-sourceCompatibility = 11
+sourceCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -18,22 +18,29 @@ dependencies {
 
 
     // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
-    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.8.0'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.16.1'
+
 
     // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
-    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.8.0'
+    testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.16.1'
+
 
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.4.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.20.0'
+
 
    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.1'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.12'
+
 
 
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.12'
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.3.0")
+
+    // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.7.0'
+
 
 }
 

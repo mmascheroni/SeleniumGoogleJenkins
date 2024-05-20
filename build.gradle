@@ -20,6 +20,8 @@ dependencies {
     // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.16.1'
 
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.16.1'
+
 
     // https://mvnrepository.com/artifact/io.cucumber/cucumber-junit
     testImplementation group: 'io.cucumber', name: 'cucumber-junit', version: '7.16.1'

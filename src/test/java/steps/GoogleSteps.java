@@ -15,10 +15,20 @@ import pages.GooglePage;
 
 public class GoogleSteps {
     private WebDriver driver;
+    ChromeOptions options;
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
+        options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--remote-allow-origins=*"); // Nueva opción agregada
+        options.addArguments("--disable-gpu");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--window-size=1920,1080");
+
+        driver = new ChromeDriver(options);
         GooglePage googlePage = new GooglePage(driver, null);
         googlePage.setup();
     }

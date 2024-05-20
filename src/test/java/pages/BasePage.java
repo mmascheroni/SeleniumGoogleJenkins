@@ -27,6 +27,13 @@ public class BasePage {
     public void setup() {
         WebDriverManager.chromedriver().setup();
 
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Ejecutar en modo headless
+        options.addArguments("--no-sandbox"); // Deshabilitar el sandbox
+        options.addArguments("--disable-dev-shm-usage");
+
+        driver = new ChromeDriver(options);
+
         driver.manage().window().maximize();
     }
 

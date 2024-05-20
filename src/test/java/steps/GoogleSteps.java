@@ -9,6 +9,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.GooglePage;
 
 public class GoogleSteps {
@@ -16,7 +17,9 @@ public class GoogleSteps {
 
     @Before
     public void setUp() {
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+
         GooglePage googlePage = new GooglePage(driver, null);
         googlePage.setup();
     }

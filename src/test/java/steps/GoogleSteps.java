@@ -1,7 +1,11 @@
 package steps;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -14,13 +18,19 @@ import pages.GooglePage;
 
 public class GoogleSteps {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @Before
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Ejecutar en modo headless
+        options.addArguments("--no-sandbox"); // Deshabilitar el sandbox
+        options.addArguments("--disable-dev-shm-usage"); // Deshabilitar el uso de memoria compartida de dev
 
-        GooglePage googlePage = new GooglePage(driver, null);
+        driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofMillis(5000));
+
+        GooglePage googlePage = new GooglePage(driver, wait);
         googlePage.setup();
     }
 

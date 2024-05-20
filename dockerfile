@@ -1,34 +1,46 @@
-# Usa la imagen oficial de Jenkins como base
-FROM jenkins/jenkins:latest
+# Base image from Jenkins LTS
+FROM jenkins/jenkins:lts
 
-# Cambia al usuario root para instalar dependencias
 USER root
 
-# Instala wget y gnupg2 para descargar paquetes y claves de firma
-RUN apt-get update && \
-    apt-get install -y wget gnupg2 unzip
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg2 \
+    apt-transport-https \
+    unzip \
+    curl \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
 
-# Descarga y añade la clave de firma de Google Chrome
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome-archive-keyring.gpg
+# Install Google Chrome
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable
 
-# Agrega el repositorio de Google Chrome a la lista de fuentes de apt
-RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+# Get Chrome version
+RUN google-chrome --version > /tmp/chrome_version && \
+    CHROME_VERSION=$(cat /tmp/chrome_version | awk '{print $3}') && \
+    echo "Using Chrome version: $CHROME_VERSION"
 
-# Actualiza los repositorios de apt y luego instala Google Chrome
-RUN apt-get update && \
-    apt-get install -y google-chrome-stable
-
-# Descarga y descomprime el ChromeDriver
-RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip && \
+# Install ChromeDriver
+RUN CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
+    chmod +x /usr/local/bin/chromedriver && \
     rm /tmp/chromedriver.zip
 
-# Cambia al usuario jenkins
-USER jenkins
+# Ensure ChromeDriver is compatible with Chrome
+RUN chromedriver --version
 
-# Expone el puerto 8080 para acceder a Jenkins y el puerto 50000 para agentes
-EXPOSE 8086
-EXPOSE 50000
+# Install necessary plugins (optional, you can add more as needed)
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator git github
 
-# Establece el volumen para persistir los datos de Jenkins
+# Set environment variables for Jenkins
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+
+# Set the Jenkins home directory
 VOLUME /var/jenkins_home
+
+# Switch back to Jenkin
+USER jenkins

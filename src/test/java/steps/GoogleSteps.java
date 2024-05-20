@@ -2,7 +2,6 @@ package steps;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -10,25 +9,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.GooglePage;
 
 public class GoogleSteps {
     private WebDriver driver;
-    ChromeOptions options;
 
     @Before
     public void setUp() {
-        options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--remote-allow-origins=*"); // Nueva opción agregada
-        options.addArguments("--disable-gpu");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--window-size=1920,1080");
-
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         GooglePage googlePage = new GooglePage(driver, null);
         googlePage.setup();
     }

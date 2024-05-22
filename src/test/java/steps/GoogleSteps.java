@@ -22,12 +22,12 @@ public class GoogleSteps {
 
     @Before
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // Ejecutar en modo headless
-        options.addArguments("--no-sandbox"); // Deshabilitar el sandbox
-        options.addArguments("--disable-dev-shm-usage"); // Deshabilitar el uso de memoria compartida de dev
+        // ChromeOptions options = new ChromeOptions();
+        // options.addArguments("--headless"); // Ejecutar en modo headless
+        // options.addArguments("--no-sandbox"); // Deshabilitar el sandbox
+        // options.addArguments("--disable-dev-shm-usage"); // Deshabilitar el uso de memoria compartida de dev
 
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofMillis(5000));
 
         GooglePage googlePage = new GooglePage(driver, wait);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Test Google search funcionality" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-22T16:53:45" hostname="MAURO" time="6.858">
+<testsuite name="Test Google search funcionality" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-22T17:08:19" hostname="MAURO" time="7.746">
   <properties/>
-  <testcase name="As a user I enter a search criteria in Google" classname="Test Google search funcionality" time="6.858"/>
+  <testcase name="As a user I enter a search criteria in Google" classname="Test Google search funcionality" time="7.746"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[may. 22, 2024 1:53:48 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
+  <system-err><![CDATA[may. 22, 2024 2:08:21 P. M. org.openqa.selenium.devtools.CdpVersionFinder findNearestMatch
 WARNING: Unable to find an exact match for CDP version 125, returning the closest version; found: 124; Please update to a Selenium version that supports CDP version 125
 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 125.0.6422.76 (resolved driver for Chrome 125)
 [Test worker] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting webdriver.chrome.driver as C:\Users\mauro\.cache\selenium\chromedriver\win64\125.0.6422.76\chromedriver.exe
